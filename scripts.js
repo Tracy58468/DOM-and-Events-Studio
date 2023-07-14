@@ -5,25 +5,31 @@ function init () {
     const landingButton = document.getElementById("landing");    
     const abortButton = document.getElementById("missionAbort");
     const status = document.getElementById('flightStatus');
-    const display = document.getElementById('flightDisplay');
+    // const display = document.getElementById('flightDisplay');
     const backgroundShuttle = document.getElementById('shuttleBackground');
-    let rocketImg = document.getElementById('rocket');
-    rocketImg.style.position = 'absolute';
-    rocketImg.style.left = '0px';
-    rocketImg.style.bottom = '0px';
+    const shutHt = document.getElementById('spaceShuttleHeight');
+    const rocketImg = document.getElementById('rocket');
     const upBtn = document.getElementById('up');
     const downBtn = document.getElementById('down');
     const rightBtn = document.getElementById('right');
     const leftBtn = document.getElementById('left');
-    let shuttleHeight = document.getElementById('spaceShuttleHeight');
-    let shuttleWidth = document.getElementById('spaceShuttleWidth');
-
+    let top = 250;
+    let bottom = 0;
+    let right = 0;
+    let left = -20;
+    rocketImg.style.position = 'absolute';
+    rocketImg.style.top = top + 'px';
+    rocketImg.style.bottom = bottom + 'px';
+    rocketImg.style.right = right + 'px';
+    rocketImg.style.left = left + 'px';
 
     takeOffButton.addEventListener("click", function (event) {
         if (window.confirm("Confirm that the shuttle is ready for takeoff.") == true) {
             status.innerHTML = "Shuttle in flight.";
             backgroundShuttle.style.backgroundColor = 'blue';
-            shuttleHeight.innerHTML = "10000";
+            shutHt.innerHTML = "10000";
+            top -= 10;
+            rocketImg.style.top = top + 'px';
         } else {
             status.innerHTML = "Not ready."
             backgroundShuttle.style.backgroundColor = 'red';
@@ -32,46 +38,50 @@ function init () {
       });
 
     upBtn.addEventListener("click", function () {
-        shuttleHeight.innerHTML -= -10000;
+        shutHt.innerHTML -= -10000;
+        top -= 10;
+        rocketImg.style.top = top + 'px';
     });
 
     downBtn.addEventListener("click", function () {
-        shuttleHeight.innerHTML -= 10000;
+        shutHt.innerHTML -= 10000;
+        top += 10;
+        rocketImg.style.top = top + 'px';
     });
 
     rightBtn.addEventListener("click", function () {
-        movement = parseInt('rocketImg.style.left') + 10 + 'px';
-        rocketImg.style.left = movement;
+        left += 10;
+        rocketImg.style.left = left + 'px';
     });
 
-    // lefttBtn.addEventListener("click", function () {
-    //     rocket.style.position += '10px';
-    // });
+    leftBtn.addEventListener("click", function () {
+        left -= 10;
+        rocketImg.style.left = left + 'px';
+    });
 
     landingButton.addEventListener("click", function (event) {
         window.alert("The shuttle is landing. Landing gear engaged.");
         status.innerHTML = "The shuttle has landed.";
         backgroundShuttle.style.backgroundColor = 'green';
-        shuttleHeight.innerHTML = "0";        
+        shutHt.innerHTML = "0";
+        top = 250;
+        left = -20;
+        rocketImg.style.top = top + 'px';  
+        rocketImg.style.left = left + 'px';    
       });
 
     abortButton.addEventListener("click", function (event) {
       if (window.confirm("Confirm that you want to abort the mission.") == true) {
           status.innerHTML = "Mission aborted.";
           backgroundShuttle.style.backgroundColor = '';
-          shuttleHeight.innerHTML = "0";
-      } else {
-          status.innerHTML = "Not ready."
-          backgroundShuttle.style.backgroundColor = 'red';
+          shutHt.innerHTML = "0";
+          top = 250;
+          left = -20;
+          rocketImg.style.top = top + 'px';
+          rocketImg.style.left = left + 'px';   
       };
         
       });
-
-
-    //   abortButton.addEventListener("click", function (event) {
-    //     abortButton.style.backgroundColor = 'red';
-        
-    //   });
 
 }
 
