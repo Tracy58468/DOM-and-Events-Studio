@@ -7,12 +7,16 @@ function init () {
     const status = document.getElementById('flightStatus');
     const display = document.getElementById('flightDisplay');
     const backgroundShuttle = document.getElementById('shuttleBackground');
-    const rocketImg = document.getElementById('rocket');
+    let rocketImg = document.getElementById('rocket');
+    rocketImg.style.position = 'absolute';
+    rocketImg.style.left = '0px';
+    rocketImg.style.bottom = '0px';
     const upBtn = document.getElementById('up');
     const downBtn = document.getElementById('down');
     const rightBtn = document.getElementById('right');
     const leftBtn = document.getElementById('left');
-    const shuttleHeight = document.getElementById('spaceShuttleHeight');
+    let shuttleHeight = document.getElementById('spaceShuttleHeight');
+    let shuttleWidth = document.getElementById('spaceShuttleWidth');
 
 
     takeOffButton.addEventListener("click", function (event) {
@@ -28,15 +32,20 @@ function init () {
       });
 
     upBtn.addEventListener("click", function () {
-        shuttleHeight.innerHTML += 10000;
+        shuttleHeight.innerHTML -= -10000;
     });
 
     downBtn.addEventListener("click", function () {
         shuttleHeight.innerHTML -= 10000;
     });
 
-    // rightBtn.addEventListener("click", function () {
-    //     rocket.position = 10px;
+    rightBtn.addEventListener("click", function () {
+        movement = parseInt('rocketImg.style.left') + 10 + 'px';
+        rocketImg.style.left = movement;
+    });
+
+    // lefttBtn.addEventListener("click", function () {
+    //     rocket.style.position += '10px';
     // });
 
     landingButton.addEventListener("click", function (event) {
